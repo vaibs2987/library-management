@@ -1,13 +1,11 @@
 package com.library.security;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.library.config.DataService;
 import com.library.dao.BookDao;
 import com.library.dao.SubscriptionDao;
 import com.library.dao.UserDao;
@@ -20,8 +18,6 @@ import com.library.model.UserSubscriptionDetail;
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
 
-	@Autowired
-	private DataService dataService;
 
 	@Autowired
 	private BookDao bookDao;
