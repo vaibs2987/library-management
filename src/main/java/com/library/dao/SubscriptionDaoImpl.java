@@ -19,7 +19,11 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
 
 	@Override
 	public Long createSubscription(Subscription subscription) {
-		Long id = helperService.getRandomNumuber();
+		Long id = subscription.getId();
+		if (id == null) {
+			id = helperService.getRandomNumuber();
+		}
+		subscription.setId(id);
 		subscriptionMap.put(id, subscription);
 		return id;
 	}

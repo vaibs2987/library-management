@@ -61,7 +61,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public boolean checkBookAvailabilty(Long bookId) {
 		Book book = bookDao.getBookFromMap(bookId, true);
-		return book != null ? true : false;
+		if (book == null) {
+			return false;
+		}
+		int availableQuantity = book.getCurrnetQuantity();
+		int totalQuantity = book.getTotalQuanity();
+		return totalQuantity - availableQuantity > 0;
 	}
 
 }

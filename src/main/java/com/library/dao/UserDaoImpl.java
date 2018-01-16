@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.library.model.Book;
-import com.library.model.BookingStatus;
 import com.library.model.User;
 import com.library.util.HelperService;
 
@@ -51,7 +50,7 @@ public class UserDaoImpl implements UserDao {
 		List<Book> list = userBookMap.get(userId);
 		for (Book book : list) {
 			if (book.getId().equals(bookId)) {
-				book.setCurrentStatus(BookingStatus.RELEASED.name());
+				//book.setCurrentStatus(BookingStatus.RELEASED.name());
 				break;
 			}
 		}

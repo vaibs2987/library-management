@@ -10,8 +10,8 @@ public class Book {
 	private Long authorId;
 	private Date publicationYear;
 	private Date addedDate;
-	private String currentStatus;
-	private BookingHistory currentBookingDetail;
+	private int totalQuanity;
+	private int currnetQuantity;
 
 	public Long getId() {
 		return id;
@@ -53,20 +53,28 @@ public class Book {
 		this.addedDate = addedDate;
 	}
 
-	public String getCurrentStatus() {
-		return currentStatus;
+	public Date getPublicationYear() {
+		return publicationYear;
 	}
 
-	public void setCurrentStatus(String currentStatus) {
-		this.currentStatus = currentStatus;
+	public void setPublicationYear(Date publicationYear) {
+		this.publicationYear = publicationYear;
 	}
 
-	public BookingHistory getCurrentBookingDetail() {
-		return currentBookingDetail;
+	public int getTotalQuanity() {
+		return totalQuanity;
 	}
 
-	public void setCurrentBookingDetail(BookingHistory currentBookingDetail) {
-		this.currentBookingDetail = currentBookingDetail;
+	public void setTotalQuanity(int totalQuanity) {
+		this.totalQuanity = totalQuanity;
+	}
+
+	public int getCurrnetQuantity() {
+		return currnetQuantity;
+	}
+
+	public void setCurrnetQuantity(int currnetQuantity) {
+		this.currnetQuantity = currnetQuantity;
 	}
 
 	@Override
@@ -93,13 +101,4 @@ public class Book {
 			return false;
 		return true;
 	}
-
-	public Date getPublicationYear() {
-		return publicationYear;
-	}
-
-	public void setPublicationYear(Date publicationYear) {
-		this.publicationYear = publicationYear;
-	}
-
 }

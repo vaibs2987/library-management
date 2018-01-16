@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.library.model.Book;
 import com.library.model.BookingHistory;
-import com.library.model.BookingStatus;
 import com.library.util.HelperService;
 
 @Repository
@@ -32,7 +31,6 @@ public class BookDaoImpl implements BookDao {
 		}
 		book.setId(id);
 		book.setAddedDate(new Date());
-		book.setCurrentStatus(BookingStatus.AVAILABLE.name());
 		availableBookMap.put(id, book);
 		return book;
 	}
@@ -58,19 +56,22 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public Book removeBookFromMap(Long bookId, boolean isAvailableMap) {
-		Book book = null;
+		Book book = availableBookMap.get(bookId);
+		int currentQuantity = book.getCurrnetQuantity();
 		if (isAvailableMap) {
-			book = availableBookMap.remove(bookId);
+			book.setCurrnetQuantity(currentQuantity++);
+
 		} else {
+			book.setCurrnetQuantity(currentQuantity--);
 			book = borrowedBookMap.remove(bookId);
 		}
+		availableBookMap.put(bookId, book);
 		return book;
 	}
 
 	@Override
 	public Book addBookToBorrowedMap(BookingHistory bookingHistory) {
 		Book book = getBookById(bookingHistory.getBookId());
-		book.setCurrentBookingDetail(bookingHistory);
 		borrowedBookMap.put(book.getId(), book);
 		return book;
 	}
@@ -83,7 +84,6 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public void addBookToAvailableMap(Book book) {
-		book.setCurrentBookingDetail(null);
 		availableBookMap.put(book.getId(), book);
 	}
 
