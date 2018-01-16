@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.library.model.Subscription;
 import com.library.util.HelperService;
 
-@Component
+@Repository
 public class SubscriptionDaoImpl implements SubscriptionDao {
 
 	@Autowired
@@ -22,11 +22,6 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
 		Long id = helperService.getRandomNumuber();
 		subscriptionMap.put(id, subscription);
 		return id;
-	}
-
-	@Override
-	public Map<Long, Subscription> getSubscriptionMap() {
-		return subscriptionMap;
 	}
 
 	@Override

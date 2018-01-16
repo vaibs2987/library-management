@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.library.model.Subscription;
 import com.library.model.UserSubscriptionDetail;
 import com.library.util.HelperService;
 
-@Component
+@Repository
 public class UserSubscriptionDaoImpl implements UserSubscriptionDao {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class UserSubscriptionDaoImpl implements UserSubscriptionDao {
 	private UserSubscriptionDetail createObj(Long subscriptionId, Long userId) {
 		UserSubscriptionDetail userSub = new UserSubscriptionDetail();
 		Long userSubsciptionId = helperService.getRandomNumuber();
-		Subscription subscription = subscriptionDao.getSubscriptionMap().get(subscriptionId);
+		Subscription subscription = subscriptionDao.getSubscriptionDao(subscriptionId);
 		userSub.setId(userSubsciptionId);
 		Date currentDate = new Date();
 		userSub.setStartDate(currentDate);

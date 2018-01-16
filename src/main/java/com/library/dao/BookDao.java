@@ -1,7 +1,6 @@
 package com.library.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.library.model.Book;
 import com.library.model.BookingHistory;
@@ -12,9 +11,7 @@ public interface BookDao {
 
 	List<Book> getAllBooks();
 
-	Map<Long, Book> getAvailableBookMap();
-
-	Map<Long, Book> getBorrowedBookMap();
+	Book getBookFromMap(Long bookId, boolean isAvailableMap);
 
 	Book getBookById(Long bookId);
 

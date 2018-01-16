@@ -46,13 +46,14 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public Map<Long, Book> getAvailableBookMap() {
-		return availableBookMap;
-	}
-
-	@Override
-	public Map<Long, Book> getBorrowedBookMap() {
-		return borrowedBookMap;
+	public Book getBookFromMap(Long bookId, boolean isAvailableMap) {
+		Book book = null;
+		if (isAvailableMap) {
+			book = availableBookMap.get(bookId);
+		} else {
+			book = borrowedBookMap.get(bookId);
+		}
+		return book;
 	}
 
 	@Override

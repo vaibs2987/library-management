@@ -1,7 +1,6 @@
 package com.library.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.library.model.Book;
 import com.library.model.User;
@@ -16,7 +15,7 @@ public interface UserDao {
 
 	List<Book> getBooksById(Long userId);
 
-	Map<Long, User> getUserMap();
-
 	int getBookCountByUser(Long userId);
+
+	User getUserById(Long userId);
 }

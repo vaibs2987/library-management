@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.library.config.PropertService;
 import com.library.model.BookingHistory;
 import com.library.model.BookingStatus;
 import com.library.util.HelperService;
 
-@Service
+@Repository
 public class BookingHistoryDaoImpl implements BookingHistoryDao {
 
 	@Autowired

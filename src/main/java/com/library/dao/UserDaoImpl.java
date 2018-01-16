@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.library.model.Book;
 import com.library.model.BookingStatus;
 import com.library.model.User;
 import com.library.util.HelperService;
 
-@Component
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
@@ -64,14 +64,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public Map<Long, User> getUserMap() {
-		return userMap;
-	}
-
-	@Override
 	public int getBookCountByUser(Long userId) {
 		List<Book> books = userBookMap.get(userId);
 		return books == null ? 0 : books.size();
+	}
+
+	@Override
+	public User getUserById(Long userId) {
+		return userMap.get(userId);
 	}
 
 }

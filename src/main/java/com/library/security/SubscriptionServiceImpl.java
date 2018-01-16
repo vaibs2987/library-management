@@ -1,7 +1,6 @@
 package com.library.security;
 
 import java.util.Date;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,6 @@ import com.library.model.UserSubscriptionDetail;
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
 
-
 	@Autowired
 	private BookDao bookDao;
 
@@ -33,15 +31,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public boolean checkSubscription(Long userId) {
-		Map<Long, User> userMap = userDao.getUserMap();
-		User user = userMap.get(userId);
+		User user = userDao.getUserById(userId);
 		return (user != null && user.getCurrentSubscriptionDetailId() != null) ? true : false;
 	}
 
 	@Override
 	public boolean checkSubscriptionExpiry(Long userId) {
-		Map<Long, User> userMap = userDao.getUserMap();
-		User user = userMap.get(userId);
+		User user = userDao.getUserById(userId);
 		Long subscrptionId = user.getCurrentSubscriptionDetailId();
 		UserSubscriptionDetail userSubDetail = userSubscriptionDao.getUserSubsciption(subscrptionId);
 		return (userSubDetail.getStatus().equalsIgnoreCase("ACTIVE")
@@ -51,8 +47,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public boolean checkSubscrptionBookLimit(Long userId) {
-		Map<Long, User> userMap = userDao.getUserMap();
-		User user = userMap.get(userId);
+		User user = userDao.getUserById(userId);
 		if (user == null) {
 			return false;
 		}
@@ -65,7 +60,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public boolean checkBookAvailabilty(Long bookId) {
-		Book book = bookDao.getAvailableBookMap().get(bookId);
+		Book book = bookDao.getBookFromMap(bookId, true);
 		return book != null ? true : false;
 	}
 
