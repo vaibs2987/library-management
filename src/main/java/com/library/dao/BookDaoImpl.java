@@ -2,7 +2,7 @@ package com.library.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +16,9 @@ import com.library.util.HelperService;
 @Repository
 public class BookDaoImpl implements BookDao {
 
-	private Map<Long, Book> availableBookMap = new HashMap<>();
+	private Map<Long, Book> availableBookMap = new LinkedHashMap<>();
 
-	private Map<Long, Book> borrowedBookMap = new HashMap<>();
+	private Map<Long, Book> borrowedBookMap = new LinkedHashMap<>();
 
 	@Autowired
 	private HelperService helperService;

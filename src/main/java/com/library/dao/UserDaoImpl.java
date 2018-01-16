@@ -1,7 +1,8 @@
 package com.library.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +22,15 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private BookDao bookDao;
 
-	private Map<Long, User> userMap = new HashMap<>();
-	private Map<Long, List<Book>> userBookMap = new HashMap<>();
+	private Map<Long, User> userMap = new LinkedHashMap<>();
+	private Map<Long, List<Book>> userBookMap = new LinkedHashMap<>();
 
 	@Override
 	public Long createUser(User user, Long roleId) {
-		Long id = helperService.getRandomNumuber();
+		Long id = user.getId();
+		if (id == null) {
+			id = helperService.getRandomNumuber();
+		}
 		user.setId(id);
 		userMap.put(id, user);
 		return id;
@@ -50,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 		List<Book> list = userBookMap.get(userId);
 		for (Book book : list) {
 			if (book.getId().equals(bookId)) {
-				//book.setCurrentStatus(BookingStatus.RELEASED.name());
+				// book.setCurrentStatus(BookingStatus.RELEASED.name());
 				break;
 			}
 		}
@@ -71,6 +75,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUserById(Long userId) {
 		return userMap.get(userId);
+	}
+
+	@Override
+	public Collection<User> getAllUsers() {
+		return userMap.values();
 	}
 
 }
