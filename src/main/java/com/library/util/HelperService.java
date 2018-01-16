@@ -11,10 +11,11 @@ import com.library.model.Subscription;
 
 @Service
 public class HelperService {
-	Random rand = new Random();
+	Random random = new Random();
 
 	public Long getRandomNumuber() {
-		return rand.nextLong();
+		Long id = (long) random.nextInt(Integer.MAX_VALUE);
+		return id;
 	}
 
 	public Date extendCurrentDate(int month) {
@@ -23,8 +24,7 @@ public class HelperService {
 		return calendar.getTime();
 	}
 
-	public Subscription createSubscription(String name, BigDecimal charges, 
-			int durationInMonths, int bookLimit) {
+	public Subscription createSubscription(String name, BigDecimal charges, int durationInMonths, int bookLimit) {
 		Subscription subscription = new Subscription(getRandomNumuber(), name, charges, durationInMonths, bookLimit);
 		return subscription;
 	}

@@ -51,8 +51,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		if (user == null) {
 			return false;
 		}
-		Long subscrptionId = user.getCurrentSubscriptionDetailId();
-		Subscription subscription = subscriptionDao.getSubscriptionDao(subscrptionId);
+		Long subscrptionDetailId = user.getCurrentSubscriptionDetailId();
+		UserSubscriptionDetail userSubscriptionDetail = userSubscriptionDao.getUserSubsciption(subscrptionDetailId);
+		if (userSubscriptionDetail == null) {
+			return false;
+		}
+		Subscription subscription = subscriptionDao.getSubscriptionDao(userSubscriptionDetail.getSubscriptionId());
+		if (subscription == null) {
+			return false;
+		}
 		int maxBookLimit = subscription.getBookLimit();
 		int userBookCount = userDao.getBookCountByUser(userId);
 		return maxBookLimit >= userBookCount ? true : false;

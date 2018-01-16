@@ -18,10 +18,11 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.library.security.exception.AccessDeniedExpection;
+
 /**
  * 
- * @author vaibhav 
- * Aspect for handling expression.
+ * @author vaibhav Aspect for handling expression.
  */
 @EnableWebMvc
 @ControllerAdvice
@@ -33,8 +34,12 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
 	String handleControllerException(HttpServletRequest req, Throwable ex) {
 
 		Exception errorResponse = new Exception(ex);
+		if (errorResponse instanceof AccessDeniedExpection) {
+			System.out.println(errorResponse.getMessage());
+		}
 		Throwable throwable = errorResponse.getCause();
-
+		errorResponse.printStackTrace();
+		System.out.println(errorResponse.getMessage());
 		return "Exception occurs";
 	}
 

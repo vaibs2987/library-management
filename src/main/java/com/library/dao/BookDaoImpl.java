@@ -39,7 +39,6 @@ public class BookDaoImpl implements BookDao {
 	public List<Book> getAllBooks() {
 		List<Book> list = new ArrayList<>();
 		list.addAll(availableBookMap.values());
-		list.addAll(borrowedBookMap.values());
 		return list;
 	}
 
@@ -59,10 +58,11 @@ public class BookDaoImpl implements BookDao {
 		Book book = availableBookMap.get(bookId);
 		int currentQuantity = book.getCurrnetQuantity();
 		if (isAvailableMap) {
-			book.setCurrnetQuantity(currentQuantity++);
+
+			book.setCurrnetQuantity(currentQuantity + 1);
 
 		} else {
-			book.setCurrnetQuantity(currentQuantity--);
+			book.setCurrnetQuantity(currentQuantity - 1);
 			book = borrowedBookMap.remove(bookId);
 		}
 		availableBookMap.put(bookId, book);
@@ -78,8 +78,7 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public Book getBookById(Long bookId) {
-		System.out.println("Total: " + availableBookMap.size());
-		return availableBookMap.get(bookId) == null ? borrowedBookMap.get(bookId) : availableBookMap.get(bookId);
+		return availableBookMap.get(bookId);
 	}
 
 	@Override

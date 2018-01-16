@@ -73,10 +73,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		final User other = (User) obj;
-		if (email == null) {
-			if (other.email != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!email.equals(other.email))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

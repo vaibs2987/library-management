@@ -15,6 +15,7 @@ import com.library.dao.BookDao;
 import com.library.dao.RoleDao;
 import com.library.dao.SubscriptionDao;
 import com.library.dao.UserDao;
+import com.library.dao.UserSubscriptionDao;
 import com.library.model.Book;
 import com.library.model.Role;
 import com.library.model.Subscription;
@@ -30,6 +31,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Autowired
 	private SubscriptionDao subscriptionDao;
+
+	@Autowired
+	private UserSubscriptionDao userSubscriptionDao;
 
 	@Autowired
 	private DataService dataService;
@@ -69,15 +73,19 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 				roles.add(adminRole);
 				user.setUserRoles(roles);
 			} else if (i % 2 == 0) {
-				user.setCurrentSubscriptionDetailId(yearlySubId);
+				Long userSubscriptionDetailId = userSubscriptionDao.buySubscription(yearlySubId, user.getId());
+				user.setCurrentSubscriptionDetailId(userSubscriptionDetailId);
 				roles.add(userRole);
 				user.setUserRoles(roles);
+
 			} else {
 				roles.add(userRole);
 				user.setUserRoles(roles);
-				user.setCurrentSubscriptionDetailId(monthlySubId);
+				Long userSubscriptionDetailId = userSubscriptionDao.buySubscription(yearlySubId, user.getId());
+				user.setCurrentSubscriptionDetailId(userSubscriptionDetailId);
+
 			}
-			Long id = userDao.createUser(user, 1l);
+			Long id = userDao.createUser(user, null);
 			System.out.println("User :" + id);
 			i++;
 		}

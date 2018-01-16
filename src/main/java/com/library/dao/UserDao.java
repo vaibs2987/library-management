@@ -1,6 +1,5 @@
 package com.library.dao;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.library.model.Book;
@@ -20,5 +19,5 @@ public interface UserDao {
 
 	User getUserById(Long userId);
 	
-	Collection<User> getAllUsers();
+	List<User> getAllUsers();
 }

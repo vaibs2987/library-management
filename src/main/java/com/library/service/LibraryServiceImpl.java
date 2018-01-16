@@ -15,8 +15,6 @@ public class LibraryServiceImpl implements LibraryService {
 	@Autowired
 	private BookDao bookDao;
 
-
-
 	public Long addBookToLibrary(Book book) {
 		book = bookDao.addBook(book);
 		return book.getId();
@@ -43,6 +41,11 @@ public class LibraryServiceImpl implements LibraryService {
 	public List<Book> searchAllBooks(String param) {
 
 		return null;
+	}
+
+	@Override
+	public List<Book> getAllBooks() {
+		return bookDao.getAllBooks();
 	}
 
 }

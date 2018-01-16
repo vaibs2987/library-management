@@ -1,7 +1,6 @@
 package com.library.dao;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,8 +77,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public Collection<User> getAllUsers() {
-		return userMap.values();
+	public List<User> getAllUsers() {
+		List<User> users = new ArrayList<>();
+		users.addAll(userMap.values());
+		return users;
 	}
 
 }

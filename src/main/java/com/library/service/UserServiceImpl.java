@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.library.dao.BookDao;
 import com.library.dao.BookingHistoryDao;
@@ -13,7 +12,6 @@ import com.library.model.Book;
 import com.library.model.BookingHistory;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired

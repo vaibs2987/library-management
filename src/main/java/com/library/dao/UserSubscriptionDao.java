@@ -6,5 +6,5 @@ public interface UserSubscriptionDao {
 
 	public Long buySubscription(Long subscriptionId, Long userId);
 	
-	public UserSubscriptionDetail getUserSubsciption(Long subscriptionId);
+	public UserSubscriptionDetail getUserSubsciption(Long subscriptionDetailId);
 }

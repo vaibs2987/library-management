@@ -30,8 +30,8 @@ public class UserSubscriptionDaoImpl implements UserSubscriptionDao {
 	}
 
 	@Override
-	public UserSubscriptionDetail getUserSubsciption(Long subscriptionId) {
-		return userSubDeatilMap.get(subscriptionId);
+	public UserSubscriptionDetail getUserSubsciption(Long subscriptionDetailId) {
+		return userSubDeatilMap.get(subscriptionDetailId);
 	}
 
 	private UserSubscriptionDetail createObj(Long subscriptionId, Long userId) {
@@ -43,6 +43,7 @@ public class UserSubscriptionDaoImpl implements UserSubscriptionDao {
 		userSub.setStartDate(currentDate);
 		userSub.setEndDate(helperService.extendCurrentDate(subscription.getDurationInMonths()));
 		userSub.setSubscriptionId(subscriptionId);
+		userSub.setStatus("ACTIVE");
 		userSub.setUserId(userId);
 		return userSub;
 	}

@@ -17,6 +17,9 @@ public class DataService {
 	@Autowired
 	private FileReaderService fileReaderService;
 
+	@Autowired
+	private HelperService helperService;
+
 	public Set<User> createUserObject() {
 		String path = "users.csv";
 		Set<User> users = new HashSet<>();
@@ -25,6 +28,7 @@ public class DataService {
 			String[] array = string.split(",");
 			if (!StringUtils.isEmpty(array) && array.length > 0) {
 				User user = new User(array[0], array[1], null);
+				user.setId(helperService.getRandomNumuber());
 				users.add(user);
 			}
 		}

@@ -18,5 +18,7 @@ public interface LibraryService {
 	List<Book> searchBookByCategory(String param, Long categoryId);
 
 	List<Book> searchAllBooks(String param);
+	
+	List<Book> getAllBooks();
 
 }
