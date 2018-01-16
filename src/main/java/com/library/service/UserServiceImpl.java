@@ -41,8 +41,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Book> getAllMyBook(Long userId) {
+	public List<Book> getAllMyBorrowedBook(Long userId) {
 		return userDao.getBooksById(userId);
 	}
 
+	@Override
+	public List<BookingHistory> getAllBookHistoryByUserId(Long userId) {
+		List<BookingHistory> bookingHistories = bookingHistoryDao.getAllBookHistoryByUser(userId);
+		if (bookingHistories == null) {
+			return null;
+		}
+		for (BookingHistory bookingHistory : bookingHistories) {
+			bookingHistory.setBook(bookDao.getBookById(bookingHistory.getBookId()));
+		}
+		return bookingHistories;
+	}
 }

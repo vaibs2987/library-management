@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.library.model.Book;
+import com.library.model.BookingHistory;
 
 public interface LibraryService {
 
@@ -21,4 +22,5 @@ public interface LibraryService {
 	
 	List<Book> getAllBooks();
 
+	List<BookingHistory> getAllBookHistoryByBook(Long bookId);
 }

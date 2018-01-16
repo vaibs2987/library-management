@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.library.dao.UserDao;
 import com.library.model.Book;
+import com.library.model.BookingHistory;
 import com.library.model.User;
 import com.library.service.LibraryService;
 
@@ -33,6 +34,12 @@ public class AdminController {
 	@RequestMapping(value = { "/all" }, method = { RequestMethod.GET })
 	private List<User> getUser() {
 		return userDao.getAllUsers();
+	}
+
+	@RequestMapping(value = { "/all/borrowed/history" }, method = { RequestMethod.GET })
+	public List<BookingHistory> getAllBookHistroy(@RequestParam Long bookId) {
+		List<BookingHistory> books = libraryService.getAllBookHistoryByBook(bookId);
+		return books;
 	}
 
 	@RequestMapping(value = { "/book/all" }, method = { RequestMethod.GET })

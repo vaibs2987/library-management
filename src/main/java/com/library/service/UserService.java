@@ -3,6 +3,7 @@ package com.library.service;
 import java.util.List;
 
 import com.library.model.Book;
+import com.library.model.BookingHistory;
 
 public interface UserService {
 
@@ -10,5 +11,7 @@ public interface UserService {
 
 	boolean returnBook(Long bookId, Long userId);
 
-	List<Book> getAllMyBook(Long userId);
+	List<Book> getAllMyBorrowedBook(Long userId);
+
+	List<BookingHistory> getAllBookHistoryByUserId(Long userId);
 }

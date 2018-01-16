@@ -38,8 +38,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public boolean checkSubscriptionExpiry(Long userId) {
 		User user = userDao.getUserById(userId);
+		if (user == null) {
+			return false;
+		}
 		Long subscrptionId = user.getCurrentSubscriptionDetailId();
 		UserSubscriptionDetail userSubDetail = userSubscriptionDao.getUserSubsciption(subscrptionId);
+		if (userSubDetail == null) {
+			return false;
+		}
 		return (userSubDetail.getStatus().equalsIgnoreCase("ACTIVE")
 				&& userSubDetail.getEndDate().getTime() > new Date().getTime()) ? true : false;
 

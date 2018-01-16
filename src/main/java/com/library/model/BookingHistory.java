@@ -17,6 +17,8 @@ public class BookingHistory {
 	private Date actualReleaseDate;
 
 	private String status;
+	
+	private Book book;
 
 	public BookingHistory(Long bookId, Long userId, String status, Date bookedDate, Date releaseDate,
 			Date actualReleaseDate) {
@@ -82,5 +84,13 @@ public class BookingHistory {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 }
