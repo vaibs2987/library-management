@@ -1,5 +1,7 @@
 package com.library.controller;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,13 @@ import com.library.model.Book;
 import com.library.model.BookingHistory;
 import com.library.service.UserService;
 
+/**
+ * 
+ * Class holds all the user related APIS. In all the APIS where I am passing
+ * userId should actually come from session but here I am not maintaining any
+ * session, so it is coming as parameter from the client.
+ *
+ */
 @RestController
 @RequestMapping({ "/api/library/user/v1" })
 public class UserController {
@@ -20,8 +29,16 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * API responsible for borrowing a book. Aspect is applied on it for
+	 * checking validation.
+	 * 
+	 * @param bookId
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = { "/borrow" }, method = { RequestMethod.GET })
-	public ResponseEntity<Book> borrowBook(@RequestParam Long bookId, @RequestParam Long userId) {
+	public ResponseEntity<Book> borrowBook(@RequestParam @NotNull Long bookId, @RequestParam @NotNull Long userId) {
 		Book book = userService.barrowBook(bookId, userId);
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}

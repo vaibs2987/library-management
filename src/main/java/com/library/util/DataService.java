@@ -12,6 +12,11 @@ import org.springframework.util.StringUtils;
 import com.library.model.Book;
 import com.library.model.User;
 
+/**
+ * 
+ * Class responsible for loading some sample data.
+ *
+ */
 @Service
 public class DataService {
 	@Autowired
