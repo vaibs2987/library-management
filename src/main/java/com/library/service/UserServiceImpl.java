@@ -12,6 +12,7 @@ import com.library.dao.BookingHistoryDao;
 import com.library.dao.UserDao;
 import com.library.model.Book;
 import com.library.model.BookingHistory;
+import com.library.model.User;
 
 @Service
 @Transactional
@@ -28,9 +29,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Book barrowBook(Long bookId, Long userId) {
+		Book book = bookDao.getBookById(bookId);
+		User user = userDao.getUserById(userId);
+		if (book == null || user == null) {
+			return null;
+		}
 		BookingHistory bookingHistory = bookingHistoryDao.addBookHistory(userId, bookId);
 		bookDao.removeBookFromMap(bookId, true);
-		Book book = bookDao.addBookToBorrowedMap(bookingHistory);
+		book = bookDao.addBookToBorrowedMap(bookingHistory);
 		userDao.addBookToUserMap(bookId, userId);
 		return book;
 	}
