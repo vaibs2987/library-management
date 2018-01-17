@@ -2,6 +2,11 @@ package com.library.model;
 
 import java.util.Date;
 
+/**
+ * 
+ * Class holds user subscription details.
+ *
+ */
 public class UserSubscriptionDetail {
 
 	private Long id;
@@ -10,7 +15,6 @@ public class UserSubscriptionDetail {
 	private Date startDate;
 	private Date endDate;
 	private String Status;
-	
 
 	public Long getId() {
 		return id;

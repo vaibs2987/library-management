@@ -34,7 +34,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = { "/all" }, method = { RequestMethod.GET })
-	private ResponseEntity<PageWrapper<User>> getUser(@RequestParam(defaultValue = "0") int page,
+	private ResponseEntity<PageWrapper<User>> getAllUsers(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "2") int size) {
 		PageWrapper<User> pages = libraryService.getAllUsers(page, size);
 		return new ResponseEntity<PageWrapper<User>>(pages, HttpStatus.OK);

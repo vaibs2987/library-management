@@ -8,10 +8,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.servlet.DispatcherServlet;
 
+/**
+ * 
+ * Class responsible for starting the app.
+ *
+ */
 @SpringBootApplication
 @EnableAsync
 public class App {
-	private static final Logger LOGGER = LoggerFactory.getLogger("com.library.App");
+	private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext ctx = SpringApplication.run(App.class, args);

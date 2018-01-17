@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 
 import com.library.security.exception.AccessDeniedExpection;
 
+/**
+ * 
+ * Aspect for checking user details.
+ *
+ */
 @Aspect
 @Component
 public class SubscriptionAspect {

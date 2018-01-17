@@ -2,6 +2,11 @@ package com.library.model;
 
 import java.util.Date;
 
+/**
+ * 
+ * Class hold the book data.
+ *
+ */
 public class Book {
 
 	private Long id;

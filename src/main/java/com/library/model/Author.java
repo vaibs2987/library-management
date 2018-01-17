@@ -1,5 +1,10 @@
 package com.library.model;
 
+/**
+ * 
+ * Class hold the book author details.
+ *
+ */
 public class Author {
 
 	private Long id;

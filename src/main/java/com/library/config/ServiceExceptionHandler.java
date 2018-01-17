@@ -18,8 +18,6 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.library.security.exception.AccessDeniedExpection;
-
 /**
  * 
  * Aspect for handling expression across the container.
@@ -31,16 +29,13 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(Throwable.class)
 	@ResponseBody
-	String handleControllerException(HttpServletRequest req, Throwable ex) {
+	ResponseEntity<String> handleControllerException(HttpServletRequest req, Throwable ex) {
 
 		Exception errorResponse = new Exception(ex);
-		if (errorResponse instanceof AccessDeniedExpection) {
-			System.out.println(errorResponse.getMessage());
-		}
-		Throwable throwable = errorResponse.getCause();
+		LOGGER.info(errorResponse.getMessage());
 		errorResponse.printStackTrace();
-		System.out.println(errorResponse.getMessage());
-		return "Exception occurs";
+		ResponseEntity<String> response = new ResponseEntity<String>("Api fails", HttpStatus.INTERNAL_SERVER_ERROR);
+		return response;
 	}
 
 	@Override

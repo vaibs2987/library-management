@@ -2,6 +2,11 @@ package com.library.model;
 
 import java.util.Date;
 
+/**
+ * 
+ * Class hold the complete booking history of a book.
+ *
+ */
 public class BookingHistory {
 
 	private Long id;
@@ -17,7 +22,7 @@ public class BookingHistory {
 	private Date actualReleaseDate;
 
 	private String status;
-	
+
 	private Book book;
 
 	public BookingHistory(Long bookId, Long userId, String status, Date bookedDate, Date releaseDate,

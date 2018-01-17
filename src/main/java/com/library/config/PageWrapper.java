@@ -3,6 +3,12 @@ package com.library.config;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 
+ * Class responsible for creating pagination.
+ *
+ * 
+ */
 public class PageWrapper<T> {
 
 	private int currentPage;
