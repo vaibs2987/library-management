@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.library.config.PageWrapper;
 import com.library.dao.BookDao;
 import com.library.dao.BookingHistoryDao;
 import com.library.dao.UserDao;
@@ -12,6 +14,7 @@ import com.library.model.Book;
 import com.library.model.BookingHistory;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -35,25 +38,27 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean returnBook(Long bookId, Long userId) {
 		bookingHistoryDao.updateBookingHistory(userId, bookId);
-		bookDao.removeBookFromMap(bookId, false);
+		Book book = bookDao.removeBookFromMap(bookId, false);
 		userDao.removeBookFromUserMap(bookId, userId);
-		return false;
+		return book != null ? true : false;
 	}
 
 	@Override
-	public List<Book> getAllMyBorrowedBook(Long userId) {
-		return userDao.getBooksById(userId);
+	public PageWrapper<Book> getAllMyBorrowedBook(Long userId, int page, int size) {
+		List<Book> books = userDao.getBooksById(userId);
+		return new PageWrapper<>(books, page, size);
 	}
 
 	@Override
-	public List<BookingHistory> getAllBookHistoryByUserId(Long userId) {
+	public PageWrapper<BookingHistory> getAllBookHistoryByUserId(Long userId, int page, int size) {
 		List<BookingHistory> bookingHistories = bookingHistoryDao.getAllBookHistoryByUser(userId);
 		if (bookingHistories == null) {
 			return null;
 		}
-		for (BookingHistory bookingHistory : bookingHistories) {
+		PageWrapper<BookingHistory> pages = new PageWrapper<>(bookingHistories, page, size);
+		for (BookingHistory bookingHistory : pages.getItems()) {
 			bookingHistory.setBook(bookDao.getBookById(bookingHistory.getBookId()));
 		}
-		return bookingHistories;
+		return pages;
 	}
 }

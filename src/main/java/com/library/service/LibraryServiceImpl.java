@@ -6,16 +6,22 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.library.config.PageWrapper;
 import com.library.dao.BookDao;
 import com.library.dao.BookingHistoryDao;
+import com.library.dao.UserDao;
 import com.library.model.Book;
 import com.library.model.BookingHistory;
+import com.library.model.User;
 
 @Service
 public class LibraryServiceImpl implements LibraryService {
 
 	@Autowired
 	private BookDao bookDao;
+
+	@Autowired
+	private UserDao userDao;
 
 	@Autowired
 	private BookingHistoryDao bookingHistoryDao;
@@ -49,20 +55,30 @@ public class LibraryServiceImpl implements LibraryService {
 	}
 
 	@Override
-	public List<Book> getAllBooks() {
-		return bookDao.getAllBooks();
+	public PageWrapper<Book> getAllBooks(int page, int size) {
+		List<Book> books = bookDao.getAllBooks();
+		PageWrapper<Book> pages = new PageWrapper<Book>(books, page, size);
+		return pages;
 	}
 
 	@Override
-	public List<BookingHistory> getAllBookHistoryByBook(Long bookId) {
+	public PageWrapper<User> getAllUsers(int page, int size) {
+		List<User> users = userDao.getAllUsers();
+		PageWrapper<User> pages = new PageWrapper<User>(users, page, size);
+		return pages;
+	}
+
+	@Override
+	public PageWrapper<BookingHistory> getAllBookHistoryByBook(Long bookId, int page, int size) {
 		List<BookingHistory> bookingHistories = bookingHistoryDao.getAllBookHistoryByBook(bookId);
 		if (bookingHistories == null) {
 			return null;
 		}
-		for (BookingHistory bookingHistory : bookingHistories) {
+		PageWrapper<BookingHistory> pages = new PageWrapper<>(bookingHistories, page, size);
+		for (BookingHistory bookingHistory : pages.getItems()) {
 			bookingHistory.setBook(bookDao.getBookById(bookingHistory.getBookId()));
 		}
-		return bookingHistories;
+		return pages;
 	}
 
 }

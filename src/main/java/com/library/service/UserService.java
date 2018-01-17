@@ -1,7 +1,6 @@
 package com.library.service;
 
-import java.util.List;
-
+import com.library.config.PageWrapper;
 import com.library.model.Book;
 import com.library.model.BookingHistory;
 
@@ -11,7 +10,7 @@ public interface UserService {
 
 	boolean returnBook(Long bookId, Long userId);
 
-	List<Book> getAllMyBorrowedBook(Long userId);
+	PageWrapper<Book> getAllMyBorrowedBook(Long userId, int page, int size);
 
-	List<BookingHistory> getAllBookHistoryByUserId(Long userId);
+	PageWrapper<BookingHistory> getAllBookHistoryByUserId(Long userId, int page, int size);
 }

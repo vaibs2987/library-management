@@ -3,8 +3,10 @@ package com.library.service;
 import java.util.List;
 import java.util.Set;
 
+import com.library.config.PageWrapper;
 import com.library.model.Book;
 import com.library.model.BookingHistory;
+import com.library.model.User;
 
 public interface LibraryService {
 
@@ -19,8 +21,10 @@ public interface LibraryService {
 	List<Book> searchBookByCategory(String param, Long categoryId);
 
 	List<Book> searchAllBooks(String param);
-	
-	List<Book> getAllBooks();
 
-	List<BookingHistory> getAllBookHistoryByBook(Long bookId);
+	PageWrapper<Book> getAllBooks(int page, int size);
+
+	PageWrapper<User> getAllUsers(int page, int size);
+
+	PageWrapper<BookingHistory> getAllBookHistoryByBook(Long bookId, int page, int size);
 }
